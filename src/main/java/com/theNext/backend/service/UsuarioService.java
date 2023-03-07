@@ -21,30 +21,30 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public Optional<Usuario> cadastrarUsuario(Usuario usuario){
+	public Optional<Usuario> cadastrarUsuario(Usuario email){
 		
-		if (usuarioRepository.findByUsuario(usuario.getEmail()).isPresent())
+		if (usuarioRepository.findByUsuario(email.getEmail()).isPresent())
 			return Optional.empty();
  
-		usuario.setPassword(criptografarSenha(usuario.getPassword()));
+			email.setPassword(criptografarSenha(email.getPassword()));
 
-		return Optional.of(usuarioRepository.save(usuario));
+		return Optional.of(usuarioRepository.save(email));
 	
 	}
 
-	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
+	public Optional<Usuario> atualizarUsuario(Usuario email) {
 
 		
-		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
-			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getEmail());
+		if (usuarioRepository.findById(email.getId()).isPresent()) {
+			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(email.getEmail());
 			if(buscaUsuario.isPresent()) {
-				if(buscaUsuario.get().getId()!= usuario.getId())
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"O usuario já existe !", null);
+				if(buscaUsuario.get().getId()!= email.getId())
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"O email Cadastrado já existe !", null);
 			}
 			
-			usuario.setPassword(criptografarSenha(usuario.getPassword()));
+			email.setPassword(criptografarSenha(email.getPassword()));
 			
-			return Optional.of(usuarioRepository.save(usuario));
+			return Optional.of(usuarioRepository.save(email));
 			
 		}
 			
@@ -69,9 +69,9 @@ public class UsuarioService {
 
 	}
 
-	private String gerarBasicToken(String usuario, String senha) {
+	private String gerarBasicToken(String email, String senha) {
 
-		String token = usuario + ":" + senha;
+		String token = email + ":" + senha;
 		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
 		return "Basic " + new String(tokenBase64);
 

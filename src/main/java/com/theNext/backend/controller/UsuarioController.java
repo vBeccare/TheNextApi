@@ -2,8 +2,6 @@ package com.theNext.backend.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,17 +42,17 @@ public class UsuarioController {
 	
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> postUsuario( @RequestBody Usuario usuario) {
+	public ResponseEntity<Usuario> postUsuario( @RequestBody Usuario email) {
 
-		return usuarioService.cadastrarUsuario(usuario)
+		return usuarioService.cadastrarUsuario(email)
 			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 
 	}
 
 	@PutMapping("/atualizar")
-	public ResponseEntity<Usuario> putUsuario( @RequestBody Usuario usuario) {
-		return usuarioService.atualizarUsuario(usuario)
+	public ResponseEntity<Usuario> putUsuario( @RequestBody Usuario email) {
+		return usuarioService.atualizarUsuario(email)
 			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
