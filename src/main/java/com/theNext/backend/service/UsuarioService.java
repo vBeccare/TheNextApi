@@ -4,13 +4,14 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.theNext.backend.model.Usuario;
+import com.theNext.backend.model.UsuarioLogin;
 import com.theNext.backend.repository.UsuarioRepository;
 
 
@@ -52,6 +53,30 @@ public class UsuarioService {
 
 	}	
 
+	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
+
+		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getEmail());
+
+		if (usuario.isPresent()) {
+			if (compararSenhas(usuarioLogin.get().getPassword(), usuario.get().getPassword())) {
+
+				usuarioLogin.get().setId(usuario.get().getId());
+				usuarioLogin.get().setName(usuario.get().getName());
+				usuarioLogin.get().setUsuario(usuario.get().getUsuario());
+				usuarioLogin.get().setEmail(usuario.get().getEmail());
+				usuarioLogin.get().setCpf(usuario.get().getCpf());
+				usuarioLogin.get().setGrupo(usuario.get().getGrupo());
+				usuarioLogin.get().setToken(gerarBasicToken(usuarioLogin.get().getEmail(), usuarioLogin.get().getPassword()));
+
+				return usuarioLogin;
+
+			}
+		}	
+		
+		return Optional.empty();
+		
+	}
+
 
 	private String criptografarSenha(String senha) {
 
@@ -69,14 +94,13 @@ public class UsuarioService {
 
 	}
 
-	private String gerarBasicToken(String email, String senha) {
+	private String gerarBasicToken(String usuario, String senha) {
 
-		String token = email + ":" + senha;
+		String token = usuario + ":" + senha;
 		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
 		return "Basic " + new String(tokenBase64);
 
 	}
-
 
 	}
 	

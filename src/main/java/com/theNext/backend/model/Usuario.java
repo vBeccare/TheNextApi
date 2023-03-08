@@ -22,21 +22,13 @@ public class Usuario{
 
         private String usuario;
 
-	    public String getUsuario() {
-            return usuario;
-        }
-
-        public void setUsuario(String usuario) {
-            this.usuario = usuario;
-        }
-
         private String email;
 	    
         private int cpf;
 
         private int grupo;
 
-        private boolean isAtivo;
+        private boolean isAtivo = true;
         
         public String getName() {
             return name;
@@ -68,6 +60,14 @@ public class Usuario{
 
         public void setCpf(int cpf) {
             this.cpf = cpf;
+        }
+
+        public String getUsuario() {
+            return usuario;
+        }
+
+        public void setUsuario(String usuario) {
+            this.usuario = usuario;
         }
 
         public int getGrupo() {
