@@ -1,99 +1,125 @@
 package com.theNext.backend.model;
 
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.hibernate.validator.constraints.Length;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "tb_Usuario")
-public class Usuario{
-	    
-	    @Id	
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Long id;
+public class Usuario {
 
-	    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-        private String password;
+    @NotNull(message = "O atributo Nome é Obrigatório!")
+    private String name;
 
-        private String usuario;
+    @NotBlank(message = "O atributo Senha é Obrigatório!")
+    private String password;
 
-        private String email;
-	    
-        private int cpf;
+    private String usuario;
 
-        private int grupo;
+    @Schema(example = "email@email.com.br")
+    @NotNull(message = "O atributo Email é Obrigatório!")
+    @Email(message = "O atributo Email deve ser um email válido!")
+    private String email;
 
-        private boolean isAtivo = true;
-        
-        public String getName() {
-            return name;
-        }
+    private int cpf;
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    private int grupo;
 
-        public String getPassword() {
-            return password;
-        }
+    private boolean isAtivo = true;
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public Usuario(Long id, String name, String password, String usuario, String email, int cpf, int grupo,
+            boolean isAtivo) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.usuario = usuario;
+        this.email = email;
+        this.cpf = cpf;
+        this.grupo = grupo;
+        this.isAtivo = isAtivo;
+    }
 
-        public String getEmail() {
-            return email;
-        }
+    public Usuario() {
+    }
 
-        public void setEmail(String email) {
-            this.email = email;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public int getCpf() {
-            return cpf;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public void setCpf(int cpf) {
-            this.cpf = cpf;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getUsuario() {
-            return usuario;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public void setUsuario(String usuario) {
-            this.usuario = usuario;
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public int getGrupo() {
-            return grupo;
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-        public void setGrupo(int grupo) {
-            this.grupo = grupo;
-        }
+    public int getCpf() {
+        return cpf;
+    }
 
-        public boolean isAtivo() {
-            return isAtivo;
-        }
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
 
-        public void setAtivo(boolean isAtivo) {
-            this.isAtivo = isAtivo;
-        }
+    public String getUsuario() {
+        return usuario;
+    }
 
-		public Long getId() {
-			return id;
-		}
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
-		public void setId(Long id) {
-			this.id = id;
-		}
-	
+    public int getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(int grupo) {
+        this.grupo = grupo;
+    }
+
+    public boolean isAtivo() {
+        return isAtivo;
+    }
+
+    public void setAtivo(boolean isAtivo) {
+        this.isAtivo = isAtivo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
-
-

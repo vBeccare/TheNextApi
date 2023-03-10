@@ -1,5 +1,6 @@
 package com.theNext.backend.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,8 @@ import com.theNext.backend.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	public Optional<Usuario> findByUsuario(String email);
+
+	public List<Usuario> findAllByNameContainingIgnoreCase(String name);
+
 
 }

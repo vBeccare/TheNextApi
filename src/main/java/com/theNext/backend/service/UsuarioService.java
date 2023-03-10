@@ -33,19 +33,19 @@ public class UsuarioService {
 	
 	}
 
-	public Optional<Usuario> atualizarUsuario(Usuario email) {
+	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
 		
-		if (usuarioRepository.findById(email.getId()).isPresent()) {
-			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(email.getEmail());
+		if (usuarioRepository.findById(usuario.getId()).isPresent()) {
+			Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getEmail());
 			if(buscaUsuario.isPresent()) {
-				if(buscaUsuario.get().getId()!= email.getId())
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"O email Cadastrado já existe !", null);
+				if(buscaUsuario.get().getId()!= usuario.getId())
+					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"O Usuario já existe !", null);
 			}
 			
-			email.setPassword(criptografarSenha(email.getPassword()));
+			usuario.setPassword(criptografarSenha(usuario.getPassword()));
 			
-			return Optional.of(usuarioRepository.save(email));
+			return Optional.of(usuarioRepository.save(usuario));
 			
 		}
 			
@@ -55,7 +55,7 @@ public class UsuarioService {
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 
-		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getEmail());
+		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getUsuario());
 
 		if (usuario.isPresent()) {
 			if (compararSenhas(usuarioLogin.get().getPassword(), usuario.get().getPassword())) {
@@ -67,11 +67,14 @@ public class UsuarioService {
 				usuarioLogin.get().setCpf(usuario.get().getCpf());
 				usuarioLogin.get().setGrupo(usuario.get().getGrupo());
 				usuarioLogin.get().setToken(gerarBasicToken(usuarioLogin.get().getEmail(), usuarioLogin.get().getPassword()));
+				usuarioLogin.get().setPassword(usuario.get().getPassword());
 
 				return usuarioLogin;
 
 			}
 		}	
+
+		
 		
 		return Optional.empty();
 		
@@ -94,9 +97,9 @@ public class UsuarioService {
 
 	}
 
-	private String gerarBasicToken(String usuario, String senha) {
+	private String gerarBasicToken(String email, String senha) {
 
-		String token = usuario + ":" + senha;
+		String token = email + ":" + senha;
 		byte[] tokenBase64 = Base64.encodeBase64(token.getBytes(Charset.forName("US-ASCII")));
 		return "Basic " + new String(tokenBase64);
 

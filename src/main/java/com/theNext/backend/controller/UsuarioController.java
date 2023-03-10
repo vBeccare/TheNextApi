@@ -3,6 +3,8 @@ package com.theNext.backend.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,14 +45,14 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/logar")
-	public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> user) {
-		return usuarioService.autenticarUsuario(user)
+	public ResponseEntity<UsuarioLogin> login(@RequestBody Optional<UsuarioLogin> email) {
+		return usuarioService.autenticarUsuario(email)
 			.map(resposta -> ResponseEntity.ok(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> postUsuario(@RequestBody Usuario email) {
+	public ResponseEntity<Usuario> postUsuario(@Valid @RequestBody Usuario email) {
 
 		return usuarioService.cadastrarUsuario(email)
 			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
@@ -59,7 +61,7 @@ public class UsuarioController {
 	}
 
 	@PutMapping("/atualizar")
-	public ResponseEntity<Usuario> putUsuario( @RequestBody Usuario email) {
+	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario email) {
 		return usuarioService.atualizarUsuario(email)
 			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
