@@ -54,13 +54,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		 * que foi assinado na interface UsuarioRepository
 		 */
 		
-		Optional<Usuario> email = userRepository.findByUsuario(userName);
+		Optional<Usuario> usuario = userRepository.findByUsuario(userName);
 		
 		/**
 		 * Se o usuário não existir, o método lança uma Exception do tipo UsernameNotFoundException.
 		 */ 
 	  
-		 email.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
+		usuario.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
 
 		/**
 		 * Retorna um objeto do tipo UserDetailsImpl criado com os dados recuperados do
@@ -71,6 +71,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		 * Classe UserDetailsImpl. 
 		 */
 
-		return email.map(UserDetailsImpl::new).get();
+		return usuario.map(UserDetailsImpl::new).get();
 	}
 }

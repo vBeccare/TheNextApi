@@ -31,7 +31,7 @@ import com.theNext.backend.model.Usuario;
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
-	private String email;
+	private String userName;
 	private String password;
 	private List<GrantedAuthority> authorities;
 
@@ -42,9 +42,9 @@ public class UserDetailsImpl implements UserDetails {
 	 * recupera os dados necessários através dos respectivos métodos Get
 	 */
 
-	public UserDetailsImpl(Usuario email) {
-		this.email = email.getEmail();
-		this.password = email.getPassword();
+	public UserDetailsImpl(Usuario usuario) {
+		this.userName = usuario.getUsuario();
+		this.password = usuario.getPassword();
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class UserDetailsImpl implements UserDetails {
 	@Override
 	public String getUsername() {
 
-		return email;
+		return userName;
 	}
 
 	/**
