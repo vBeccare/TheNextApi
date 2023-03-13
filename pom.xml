@@ -13,7 +13,7 @@
 	<artifactId>blogpessoal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blogpessoal</name>
-	<description>Projeto Blog Pessoal</description>
+	<description>Projeto The Next</description>
 	<properties>
 		<java.version>16</java.version>
 	</properties>
@@ -59,7 +59,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
