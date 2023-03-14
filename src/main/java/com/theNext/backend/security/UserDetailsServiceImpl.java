@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.theNext.backend.model.Usuario;
 import com.theNext.backend.repository.UsuarioRepository;
 
+
+
 /**
  *  Classe UserDetailsServiceImpl 
  * 
