@@ -48,11 +48,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
 		/**
-		 * Para buscar o usuário no Banco de dados, utilizaremos o método findByUsuario,
+		 * Para buscar o usuário no Banco de dados, utilizaremos o método findByEmail,
 		 * que foi assinado na interface UsuarioRepository
 		 */
 		
-		Optional<Usuario> usuario = userRepository.findByUsuario(userName);
+		Optional<Usuario> usuario = userRepository.findByEmail(userName);
 		
 		/**
 		 * Se o usuário não existir, o método lança uma Exception do tipo UsernameNotFoundException.

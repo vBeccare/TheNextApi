@@ -8,11 +8,9 @@ public class UsuarioLogin {
 
 	private String password;
 
-	private String usuario;
-
 	private String email;
 	
-	private int cpf;
+	private String cpf;
 
 	private int grupo;
 
@@ -44,28 +42,12 @@ public class UsuarioLogin {
 		this.password = password;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public int getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(int cpf) {
-		this.cpf = cpf;
 	}
 
 	public int getGrupo() {
@@ -90,6 +72,14 @@ public class UsuarioLogin {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 

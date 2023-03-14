@@ -43,7 +43,7 @@ public class UserDetailsImpl implements UserDetails {
 	 */
 
 	public UserDetailsImpl(Usuario usuario) {
-		this.userName = usuario.getUsuario();
+		this.userName = usuario.getEmail();
 		this.password = usuario.getPassword();
 	}
 

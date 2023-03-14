@@ -23,7 +23,7 @@ public class UsuarioService {
 
 	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 
-		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
+		if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent())
 			return Optional.empty();
 
 		usuario.setPassword(criptografarSenha(usuario.getPassword()));
@@ -34,13 +34,12 @@ public class UsuarioService {
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
-		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent()) {
+		if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
 
 			usuario.setPassword(criptografarSenha(usuario.getPassword()));
 
 			return Optional.of(usuarioRepository.save(usuario));
 		}
-			
 		
 		return Optional.empty();
 
@@ -48,15 +47,18 @@ public class UsuarioService {
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 
-		Optional<Usuario> usuario = usuarioRepository.findByUsuario(usuarioLogin.get().getUsuario());
+		Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioLogin.get().getEmail());
 
 		if (usuario.isPresent()) {
 			if (compararSenhas(usuarioLogin.get().getPassword(), usuario.get().getPassword())) {
 
 				usuarioLogin.get().setId(usuario.get().getId());
 				usuarioLogin.get().setName(usuario.get().getName());
+				usuarioLogin.get().setEmail(usuario.get().getEmail());
+				usuarioLogin.get().setCpf(usuario.get().getCpf());
+				usuarioLogin.get().setGrupo(usuario.get().getGrupo());
 				usuarioLogin.get()
-						.setToken(gerarBasicToken(usuarioLogin.get().getUsuario(), usuarioLogin.get().getPassword()));
+						.setToken(gerarBasicToken(usuarioLogin.get().getEmail(), usuarioLogin.get().getPassword()));
 				usuarioLogin.get().setPassword(usuario.get().getPassword());
 
 				return usuarioLogin;

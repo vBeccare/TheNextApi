@@ -1,7 +1,6 @@
 package com.theNext.backend.model;
 
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +9,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -22,15 +20,19 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "O atributo Nome é Obrigatório!")
     private String name;
 
+    @NotBlank(message = "O atributo Senha é Obrigatório!")
     private String password;
 
-    private String usuario;
 
+    @Schema(example = "email@email.com.br")
+	@NotNull(message = "O atributo Usuário é Obrigatório!")
+	@Email(message = "O atributo Usuário deve ser um email válido!")
     private String email;
 
-    private int cpf;
+    private String cpf;
 
     private int grupo;
 
@@ -60,22 +62,6 @@ public class Usuario {
         this.email = email;
     }
 
-    public int getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
     public int getGrupo() {
         return grupo;
     }
@@ -98,6 +84,14 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
 }
