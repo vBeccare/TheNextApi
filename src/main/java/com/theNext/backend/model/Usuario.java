@@ -6,11 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Entity
 @Table(name = "tb_Usuario")
@@ -20,16 +16,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "O atributo Nome é Obrigatório!")
     private String name;
 
-    @NotBlank(message = "O atributo Senha é Obrigatório!")
     private String password;
 
-
-    @Schema(example = "email@email.com.br")
-	@NotNull(message = "O atributo Usuário é Obrigatório!")
-	@Email(message = "O atributo Usuário deve ser um email válido!")
     private String email;
 
     private String cpf;

@@ -8,11 +8,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import com.theNext.backend.model.Usuario;
 import com.theNext.backend.model.UsuarioLogin;
 import com.theNext.backend.repository.UsuarioRepository;
-import org.springframework.http.HttpStatus;
 
 
 @Service
@@ -34,23 +32,17 @@ public class UsuarioService {
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
 
-		
 		if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
-			Optional<Usuario> buscaUsuario = usuarioRepository.findByEmail(usuario.getEmail());
-			if(buscaUsuario.isPresent()) {
-				if(buscaUsuario.get().getId()!= usuario.getId())
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"O email já existe !", null);
-			}
-			
+
 			usuario.setPassword(criptografarSenha(usuario.getPassword()));
-			
-			return Optional.of(usuarioRepository.save(usuario));
-			
+
 		}
-			
+
 		return Optional.empty();
 
 	}
+
+
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 
