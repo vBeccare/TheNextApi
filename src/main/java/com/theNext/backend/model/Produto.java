@@ -1,10 +1,17 @@
 package com.theNext.backend.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -24,8 +31,12 @@ public class Produto {
     private float preco;
 
     private int quantidade;
-    
+
     private boolean isAtivo = true;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("produto")
+    private List<Imagem> imagem;
 
     public Long getId() {
         return id;
@@ -82,5 +93,15 @@ public class Produto {
     public void setAtivo(boolean isAtivo) {
         this.isAtivo = isAtivo;
     }
+
+    public List<Imagem> getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(List<Imagem> imagem) {
+        this.imagem = imagem;
+    }
+
+    
 
 }
