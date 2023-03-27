@@ -1,6 +1,5 @@
 package com.theNext.backend.service;
 
-
 import java.nio.charset.Charset;
 import java.util.Optional;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.theNext.backend.model.Usuario;
 import com.theNext.backend.model.UsuarioLogin;
 import com.theNext.backend.repository.UsuarioRepository;
-
 
 @Service
 public class UsuarioService {
@@ -42,7 +40,26 @@ public class UsuarioService {
 
 	}
 
+	public Optional<Usuario> atualizarStatus(String email) {
+		Usuario usuario = usuarioRepository.findByEmail(email).get();
 
+		if (usuarioRepository.findByEmail(email).isPresent()) {
+
+			if (usuario.isAtivo()) {
+				usuario.setAtivo(false);
+				usuarioRepository.saveAndFlush(usuario);
+				return Optional.of(usuario);
+			} else {
+				usuario.setAtivo(true);
+				usuarioRepository.saveAndFlush(usuario);
+				return Optional.of(usuario);
+			}
+
+		}
+
+		return Optional.empty();
+
+	}
 
 	public Optional<UsuarioLogin> autenticarUsuario(Optional<UsuarioLogin> usuarioLogin) {
 

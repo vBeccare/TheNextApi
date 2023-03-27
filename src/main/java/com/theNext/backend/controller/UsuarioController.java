@@ -65,4 +65,12 @@ public class UsuarioController {
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
+	@PutMapping("/atualizar-status")
+	public ResponseEntity<Usuario> putUsuarioStatus(@Valid @RequestBody Usuario usuario) {
+		String email = usuario.getEmail();
+		return usuarioService.atualizarStatus(email)
+			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	}
+
 }
