@@ -30,6 +30,23 @@ public class ProdutoService {
 		return produtoRepository.findById(id).get();
 	}
 
+	public Optional<Produto> atualizarProduto(Produto produto) {
+		Long id = produto.getId();
+		Produto produtoBD = produtoRepository.findById(id).get();
+
+		if (produtoRepository.findById(id).isPresent()) {
+			produtoBD.setName(produto.getName());
+			produtoBD.setDescricao(produto.getDescricao());
+			produtoBD.setPreco(produto.getPreco());
+			produtoBD.setQuantidade(produto.getQuantidade());
+			produtoRepository.saveAndFlush(produtoBD);
+			return Optional.of(produtoBD);
+		}
+
+	return Optional.empty();
+
+	}
+
 	public Optional<Produto> atualizarStatus(Long id) {
 		Produto produto = produtoRepository.findById(id).get();
 
@@ -50,5 +67,6 @@ public class ProdutoService {
 		return Optional.empty();
 
 	}
-
 }
+
+

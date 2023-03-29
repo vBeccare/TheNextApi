@@ -58,6 +58,14 @@ public class ProdutoController {
 
 	}
 
+	
+	@PutMapping("/atualizar")
+	public ResponseEntity<Produto> putUsuario(@Valid @RequestBody Produto produto) {
+		return produtoService.atualizarProduto(produto)
+			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
+			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+	}
+
 	@PutMapping("/atualizar-status")
 	public ResponseEntity<Produto> atualizarProduto(@Valid @RequestBody Produto produto) {
 		Long id = produto.getId();
