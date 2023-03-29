@@ -29,11 +29,20 @@ public class UsuarioService {
 	}
 
 	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
+		String email = usuario.getEmail();
+		Usuario usuarioBD = usuarioRepository.findByEmail(email).get();
+		if (usuarioRepository.findByEmail(email).isPresent()) {
+			if (usuario.getPassword() != null) {
+				usuarioBD.setPassword(criptografarSenha(usuario.getPassword()));
+			}
 
-		if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
+			if (usuario.getGrupo() != 0) {
+				usuarioBD.setGrupo(usuario.getGrupo());
+			}
+			usuarioBD.setName(usuario.getName());
 
-			usuario.setPassword(criptografarSenha(usuario.getPassword()));
-
+			usuarioRepository.saveAndFlush(usuarioBD);
+			return Optional.of(usuarioBD);
 		}
 
 		return Optional.empty();
