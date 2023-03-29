@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,11 +36,11 @@ public class ProdutoController {
 	private ProdutoRepository produtoRepository;
 	
 	@GetMapping("/all")
-	public ResponseEntity <List<Produto>> getAll(){
-		
-		return ResponseEntity.ok(produtoRepository.findAll());
+	public ResponseEntity<Page<Produto>> listAll(Pageable pageable){
+		return new ResponseEntity<>(produtoService.listAll(pageable), HttpStatus.OK);
 		
 	}
+	
 
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<Produto>> getAll(@PathVariable String name) {

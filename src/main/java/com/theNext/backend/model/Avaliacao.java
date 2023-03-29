@@ -9,21 +9,21 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//Mudar para o bloob.
 
 @Entity
-@Table(name = "tb_imagem")
-public class Imagem {
+@Table(name = "tb_avaliacao")
+public class Avaliacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String link;
+    private String avaliacao;
 
+    private float nota;
 
-	@ManyToOne
-	@JsonIgnoreProperties("Imagem")
+    @ManyToOne
+	@JsonIgnoreProperties("avaliacao")
 	private Produto produto;
 
     public Long getId() {
@@ -34,12 +34,20 @@ public class Imagem {
         this.id = id;
     }
 
-    public String getLink() {
-        return link;
+    public String getAvaliacao() {
+        return avaliacao;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setAvaliacao(String avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public float getNota() {
+        return nota;
+    }
+
+    public void setNota(float nota) {
+        this.nota = nota;
     }
 
     public Produto getProduto() {
@@ -49,6 +57,8 @@ public class Imagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
+
+    
     
     
     
