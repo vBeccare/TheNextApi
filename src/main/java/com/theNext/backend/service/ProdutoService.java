@@ -12,8 +12,8 @@ import com.theNext.backend.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {
-    
-    @Autowired
+
+	@Autowired
 	private ProdutoRepository produtoRepository;
 
 	public Optional<Produto> cadastrarProduto(Produto produto) {
@@ -25,5 +25,25 @@ public class ProdutoService {
 	public Page<Produto> listAll(Pageable pageable){
         return produtoRepository.findAll(pageable);
     }
+	public Optional<Produto> atualizarStatus(Long id) {
+		Produto produto = produtoRepository.findById(id).get();
+
+		if (produtoRepository.findById(id).isPresent()) {
+
+			if (produto.isAtivo()) {
+				produto.setAtivo(false);
+				produtoRepository.saveAndFlush(produto);
+				return Optional.of(produto);
+			} else {
+				produto.setAtivo(true);
+				produtoRepository.saveAndFlush(produto);
+				return Optional.of(produto);
+			}
+
+		}
+
+		return Optional.empty();
+
+	}
 
 }
