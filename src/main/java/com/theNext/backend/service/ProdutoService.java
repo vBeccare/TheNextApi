@@ -31,19 +31,30 @@ public class ProdutoService {
 	}
 
 	public Optional<Produto> atualizarProduto(Produto produto) {
-		Long id = produto.getId();
-		Produto produtoBD = produtoRepository.findById(id).get();
+		Long produtoId = produto.getId();
+		Produto produtoBD = produtoRepository.findById(produtoId).get();
+		if (produtoRepository.findById(produtoId).isPresent()) {
+			if (produto.getName() != null) {
+				produtoBD.setName(produto.getName());
+			}
 
-		if (produtoRepository.findById(id).isPresent()) {
-			produtoBD.setName(produto.getName());
-			produtoBD.setDescricao(produto.getDescricao());
-			produtoBD.setPreco(produto.getPreco());
-			produtoBD.setQuantidade(produto.getQuantidade());
+			if (produto.getDescricao() != null) {
+				produtoBD.setDescricao(produto.getDescricao());
+			}
+
+			if (produto.getPreco() != 0) {
+				produtoBD.setPreco(produto.getPreco());
+			}
+
+			if (produto.getQuantidade() != 0) {
+				produtoBD.setQuantidade(produto.getQuantidade());
+			}
+
 			produtoRepository.saveAndFlush(produtoBD);
 			return Optional.of(produtoBD);
 		}
 
-	return Optional.empty();
+		return Optional.empty();
 
 	}
 
