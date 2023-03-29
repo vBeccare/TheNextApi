@@ -1,5 +1,6 @@
 package com.theNext.backend.controller;
 
+import java.util.Base64;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,31 +26,32 @@ import com.theNext.backend.service.ImagemService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImagemController {
 
-    @Autowired
+	@Autowired
 	private ImagemService imagemService;
 
 	@Autowired
 	private ImagemRepository imagemRepository;
-    
-    @GetMapping("/all")
-	public ResponseEntity <List<Imagem>> getAll(){
-		
+
+	@GetMapping("/all")
+	public ResponseEntity<List<Imagem>> getAll() {
+
 		return ResponseEntity.ok(imagemRepository.findAll());
-		
+
 	}
 
-    @PostMapping("/cadastrar")
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Imagem> postProduto(@Valid @RequestBody Imagem imagem) {
-
+		byte[] imageByte = Base64.getDecoder().decode(imagem.getFileContentBase64());
+		imagem.setBytesImage(imageByte);
 		return imagemService.cadastrarImagem(imagem)
-			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
-			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 
 	}
 
-    @DeleteMapping("/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletePostagem(@PathVariable long id) {
-		
+
 		return imagemRepository.findById(id)
 				.map(resposta -> {
 					imagemRepository.deleteById(id);

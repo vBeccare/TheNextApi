@@ -18,13 +18,14 @@ public class Imagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String link;
 
+    private String fileContentBase64;
+    private String fileName;
+    private byte[] bytesImage;
 
-	@ManyToOne
-	@JsonIgnoreProperties("Imagem")
-	private Produto produto;
+    @ManyToOne
+    @JsonIgnoreProperties("Imagem")
+    private Produto produto;
 
     public Long getId() {
         return id;
@@ -34,12 +35,28 @@ public class Imagem {
         this.id = id;
     }
 
-    public String getLink() {
-        return link;
+    public String getFileContentBase64() {
+        return fileContentBase64;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFileContentBase64(String fileContentBase64) {
+        this.fileContentBase64 = fileContentBase64;
+    }
+
+    public byte[] getBytesImage() {
+        return bytesImage;
+    }
+
+    public void setBytesImage(byte[] bytesImage) {
+        this.bytesImage = bytesImage;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public Produto getProduto() {
@@ -49,7 +66,5 @@ public class Imagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    
-    
-    
+
 }
