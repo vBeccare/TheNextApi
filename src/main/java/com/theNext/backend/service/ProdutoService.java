@@ -22,9 +22,14 @@ public class ProdutoService {
 
 	}
 
-	public Page<Produto> listAll(Pageable pageable){
-        return produtoRepository.findAll(pageable);
-    }
+	public Page<Produto> listAll(Pageable pageable) {
+		return produtoRepository.findAll(pageable);
+	}
+
+	public Produto getProductByid(Long id) {
+		return produtoRepository.findById(id).get();
+	}
+
 	public Optional<Produto> atualizarStatus(Long id) {
 		Produto produto = produtoRepository.findById(id).get();
 

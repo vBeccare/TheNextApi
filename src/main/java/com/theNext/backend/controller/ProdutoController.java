@@ -22,9 +22,6 @@ import com.theNext.backend.model.Produto;
 import com.theNext.backend.repository.ProdutoRepository;
 import com.theNext.backend.service.ProdutoService;
 
-
-
-
 @RestController
 @RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -35,25 +32,29 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@GetMapping("/all")
-	public ResponseEntity<Page<Produto>> listAll(Pageable pageable){
+	public ResponseEntity<Page<Produto>> listAll(Pageable pageable) {
 		return new ResponseEntity<>(produtoService.listAll(pageable), HttpStatus.OK);
-		
+
 	}
-	
+
+	@GetMapping("/produto/{id}")
+	public Produto getProductById(@PathVariable Long id) {
+		return produtoService.getProductByid(id);
+	}
 
 	@GetMapping("/name/{name}")
 	public ResponseEntity<List<Produto>> getAll(@PathVariable String name) {
-		return ResponseEntity.ok(produtoRepository.findAllByNameContainingIgnoreCase(name)); 
+		return ResponseEntity.ok(produtoRepository.findAllByNameContainingIgnoreCase(name));
 	}
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Produto> postProduto(@Valid @RequestBody Produto produto) {
 
 		return produtoService.cadastrarProduto(produto)
-			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
-			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 
 	}
 
@@ -61,8 +62,8 @@ public class ProdutoController {
 	public ResponseEntity<Produto> atualizarProduto(@Valid @RequestBody Produto produto) {
 		Long id = produto.getId();
 		return produtoService.atualizarStatus(id)
-			.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
-			.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
 
 	}
 
