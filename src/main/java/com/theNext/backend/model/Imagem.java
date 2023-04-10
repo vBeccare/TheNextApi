@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,13 +19,15 @@ public class Imagem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String link;
 
+    @Lob
+    private String fileContentBase64;
 
-	@ManyToOne
-	@JsonIgnoreProperties("Imagem")
-	private Produto produto;
+    private String fileName;
+
+    @ManyToOne
+    @JsonIgnoreProperties("Imagem")
+    private Produto produto;
 
     public Long getId() {
         return id;
@@ -34,12 +37,20 @@ public class Imagem {
         this.id = id;
     }
 
-    public String getLink() {
-        return link;
+    public String getFileContentBase64() {
+        return fileContentBase64;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setFileContentBase64(String fileContentBase64) {
+        this.fileContentBase64 = fileContentBase64;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public Produto getProduto() {
@@ -49,7 +60,5 @@ public class Imagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-    
-    
-    
+
 }
