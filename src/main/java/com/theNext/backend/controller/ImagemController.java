@@ -41,8 +41,6 @@ public class ImagemController {
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Imagem> postProduto(@Valid @RequestBody Imagem imagem) {
-		byte[] imageByte = Base64.getDecoder().decode(imagem.getFileContentBase64());
-		imagem.setBytesImage(imageByte);
 		return imagemService.cadastrarImagem(imagem)
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());

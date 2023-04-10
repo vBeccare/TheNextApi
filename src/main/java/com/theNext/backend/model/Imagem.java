@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,9 +20,10 @@ public class Imagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
     private String fileContentBase64;
+
     private String fileName;
-    private byte[] bytesImage;
 
     @ManyToOne
     @JsonIgnoreProperties("Imagem")
@@ -41,14 +43,6 @@ public class Imagem {
 
     public void setFileContentBase64(String fileContentBase64) {
         this.fileContentBase64 = fileContentBase64;
-    }
-
-    public byte[] getBytesImage() {
-        return bytesImage;
-    }
-
-    public void setBytesImage(byte[] bytesImage) {
-        this.bytesImage = bytesImage;
     }
 
     public String getFileName() {
