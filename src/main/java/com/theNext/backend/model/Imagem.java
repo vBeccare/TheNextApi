@@ -21,7 +21,7 @@ public class Imagem {
     private Long id;
 
     @Lob
-    private String fileContentBase64;
+    private String file;
 
     private String fileName;
 
@@ -37,12 +37,12 @@ public class Imagem {
         this.id = id;
     }
 
-    public String getFileContentBase64() {
-        return fileContentBase64;
+    public String getFile() {
+        return file;
     }
 
-    public void setFileContentBase64(String fileContentBase64) {
-        this.fileContentBase64 = fileContentBase64;
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getFileName() {
