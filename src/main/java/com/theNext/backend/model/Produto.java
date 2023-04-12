@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 
@@ -26,6 +27,7 @@ public class Produto {
 
     private int imgPrincipal;
 
+    @Lob
     private String descricao;
 
     private float avaliacao;
