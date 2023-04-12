@@ -1,5 +1,6 @@
 package com.theNext.backend.service;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,35 +27,29 @@ public class ProdutoService {
 		return produtoRepository.findAll(pageable);
 	}
 
+	public Page<Produto> findAllByNameContainingIgnoreCase(String name, Pageable pageable) {
+		return produtoRepository.findAllByNameContainingIgnoreCase(name, pageable);
+	}
+
 	public Produto getProductByid(Long id) {
 		return produtoRepository.findById(id).get();
 	}
 
 	public Optional<Produto> atualizarProduto(Produto produto) {
-		Long produtoId = produto.getId();
-		Produto produtoBD = produtoRepository.findById(produtoId).get();
-		if (produtoRepository.findById(produtoId).isPresent()) {
-			if (produto.getName() != null) {
-				produtoBD.setName(produto.getName());
-			}
+		Long id = produto.getId();
+		Produto produtoBD = produtoRepository.findById(id).get();
 
-			if (produto.getDescricao() != null) {
-				produtoBD.setDescricao(produto.getDescricao());
-			}
-
-			if (produto.getPreco() != 0) {
-				produtoBD.setPreco(produto.getPreco());
-			}
-
-			if (produto.getQuantidade() != 0) {
-				produtoBD.setQuantidade(produto.getQuantidade());
-			}
-
+		if (produtoRepository.findById(id).isPresent()) {
+			produtoBD.setName(produto.getName());
+			produtoBD.setDescricao(produto.getDescricao());
+			produtoBD.setPreco(produto.getPreco());
+			produtoBD.setQuantidade(produto.getQuantidade());
+			produtoBD.setAvaliacao(produto.getAvaliacao());
 			produtoRepository.saveAndFlush(produtoBD);
 			return Optional.of(produtoBD);
 		}
 
-		return Optional.empty();
+	return Optional.empty();
 
 	}
 
@@ -79,5 +74,3 @@ public class ProdutoService {
 
 	}
 }
-
-

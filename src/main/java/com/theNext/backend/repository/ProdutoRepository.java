@@ -1,9 +1,9 @@
 package com.theNext.backend.repository;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springdoc.core.converters.models.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +17,6 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
  
 	public Optional<Produto> findById(Long id);
-
-    public List<Produto> findAllByNameContainingIgnoreCase(String name);
+    public Page<Produto> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }
