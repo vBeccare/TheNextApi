@@ -26,6 +26,8 @@ public class Produto {
 
     private String descricao;
 
+    private int imgPrincipal;
+
     private float preco;
 
     private int quantidade;
@@ -35,10 +37,6 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("produto")
     private List<Imagem> imagem;
-
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("produto")
-    private List<Avaliacao> avaliacao;
 
     public Long getId() {
         return id;
@@ -96,13 +94,15 @@ public class Produto {
         this.imagem = imagem;
     }
 
-    public List<Avaliacao> getAvaliacao() {
-        return avaliacao;
+    public int getImgPrincipal() {
+        return imgPrincipal;
     }
 
-    public void setAvaliacao(List<Avaliacao> avaliacao) {
-        this.avaliacao = avaliacao;
+    public void setImgPrincipal(int imgPrincipal) {
+        this.imgPrincipal = imgPrincipal;
     }
+
+
 
     
 
