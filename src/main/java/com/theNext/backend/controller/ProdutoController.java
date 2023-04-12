@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,28 +46,27 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/name/{name}")
-	public ResponseEntity<List<Produto>> getAll(@PathVariable String name) {
-		return ResponseEntity.ok(produtoRepository.findAllByNameContainingIgnoreCase(name));
+	public ResponseEntity<Page<Produto>> getByName(@PathVariable String name, Pageable pageable) {
+		return new ResponseEntity<>(produtoService.findAllByNameContainingIgnoreCase(name, pageable), HttpStatus.OK);
 	}
 
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Produto> postProduto(@Valid @RequestBody Produto produto) {
-
 		return produtoService.cadastrarProduto(produto)
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
-
 	}
 
+	
 	@PutMapping("/atualizar")
-	public ResponseEntity<Produto> putProduto(@Valid @RequestBody Produto produto) {
+	public ResponseEntity<Produto> putUsuario(@Valid @RequestBody Produto produto) {
 		return produtoService.atualizarProduto(produto)
 			.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
 			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@PutMapping("/atualizar-status")
-	public ResponseEntity<Produto> putStatusProduto(@Valid @RequestBody Produto produto) {
+	public ResponseEntity<Produto> atualizarProduto(@Valid @RequestBody Produto produto) {
 		Long id = produto.getId();
 		return produtoService.atualizarStatus(id)
 				.map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(resposta))

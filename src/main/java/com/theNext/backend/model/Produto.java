@@ -24,9 +24,13 @@ public class Produto {
 
     private String name;
 
+    private int imgPrincipal;
+
     private String descricao;
 
-    private int imgPrincipal;
+    private float avaliacao;
+
+    private String categoria;
 
     private float preco;
 
@@ -94,16 +98,28 @@ public class Produto {
         this.imagem = imagem;
     }
 
+    public float getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(float avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     public int getImgPrincipal() {
         return imgPrincipal;
     }
 
     public void setImgPrincipal(int imgPrincipal) {
         this.imgPrincipal = imgPrincipal;
-    }
-
-
-
-    
+    }   
 
 }
