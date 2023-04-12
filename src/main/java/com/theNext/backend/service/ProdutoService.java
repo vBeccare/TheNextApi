@@ -1,6 +1,5 @@
 package com.theNext.backend.service;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +39,35 @@ public class ProdutoService {
 		Produto produtoBD = produtoRepository.findById(id).get();
 
 		if (produtoRepository.findById(id).isPresent()) {
-			produtoBD.setName(produto.getName());
-			produtoBD.setDescricao(produto.getDescricao());
-			produtoBD.setPreco(produto.getPreco());
-			produtoBD.setQuantidade(produto.getQuantidade());
-			produtoBD.setAvaliacao(produto.getAvaliacao());
+			if (produto.getName() != null) {
+				produtoBD.setName(produto.getName());
+			}
+
+			if (produto.getDescricao() != null) {
+				produtoBD.setDescricao(produto.getDescricao());
+			}
+
+			if (produto.getPreco() != 0) {
+				produtoBD.setPreco(produto.getPreco());
+			}
+
+			if (produto.getQuantidade() != 0) {
+				produtoBD.setQuantidade(produto.getQuantidade());
+			}
+
+			if (produto.getAvaliacao() != 0) {
+				produtoBD.setAvaliacao(produto.getAvaliacao());
+			}
+
+			if (produto.getImgPrincipal() != 0) {
+				produtoBD.setImgPrincipal(produto.getImgPrincipal());
+			}
+
 			produtoRepository.saveAndFlush(produtoBD);
 			return Optional.of(produtoBD);
 		}
 
-	return Optional.empty();
+		return Optional.empty();
 
 	}
 
