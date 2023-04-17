@@ -3,6 +3,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<!-- <profile>
+    	<id>dev</id>
+   	  <properties>
+        <activatedProperties>dev</activatedProperties>
+    	</properties>
+		</profile>
+		<profile>
+    	<id>prod</id>
+    	<properties>
+        <activatedProperties>prod</activatedProperties>
+				<activeByDefault>true</activeByDefault>
+    	</properties>
+		</profile> -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -71,6 +84,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		
 	</dependencies>
 
 	<build>
@@ -80,6 +95,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+
+		<!-- <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources> -->
 	</build>
 
 </project>
