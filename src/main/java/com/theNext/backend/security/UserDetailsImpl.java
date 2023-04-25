@@ -47,6 +47,8 @@ public class UserDetailsImpl implements UserDetails {
 		this.password = usuario.getPassword();
 	}
 
+	
+
 	/**
 	 * Método construtor sem parâmetros 
 	 */

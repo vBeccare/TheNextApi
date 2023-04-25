@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//Mudar para o bloob.
+
 
 @Entity
 @Table(name = "tb_imagem")
