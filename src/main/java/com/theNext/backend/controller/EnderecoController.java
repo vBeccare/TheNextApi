@@ -57,7 +57,7 @@ public class EnderecoController {
 
     @PutMapping("/atualizar-status")
     public ResponseEntity<Endereco> putUsuarioStatus(@Valid @RequestBody Endereco endereco) {
-        String enderecoAlt = endereco.getEndereco();
+        Long enderecoAlt = endereco.getId();
         return enderecoService.atualizarStatus(enderecoAlt)
                 .map(resposta -> ResponseEntity.status(HttpStatus.OK).body(resposta))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());

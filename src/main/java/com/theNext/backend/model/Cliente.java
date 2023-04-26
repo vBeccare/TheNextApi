@@ -27,15 +27,10 @@ public class Cliente {
 
     private String name;
 
-    private String enderecoFaturamento;
-
-    private String enderecoPadrao;
 
     private String dataNascimento;
 
     private String genero;
-
-    private String cep;
 
     private String password;
 
@@ -75,14 +70,6 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     public String getGenero() {
         return genero;
     }
@@ -107,21 +94,6 @@ public class Cliente {
         this.name = name;
     }
 
-    public String getEnderecoFaturamento() {
-        return enderecoFaturamento;
-    }
-
-    public void setEnderecoFaturamento(String enderecoFaturamento) {
-        this.enderecoFaturamento = enderecoFaturamento;
-    }
-
-    public String getEnderecoPadrao() {
-        return enderecoPadrao;
-    }
-
-    public void setEnderecoPadrao(String enderecoPadrao) {
-        this.enderecoPadrao = enderecoPadrao;
-    }
 
     public String getDataNascimento() {
         return dataNascimento;

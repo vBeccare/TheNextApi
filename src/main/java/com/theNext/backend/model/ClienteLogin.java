@@ -11,9 +11,7 @@ public class ClienteLogin {
 
     private String name;
 
-    private String enderecoFaturamento;
 
-    private String enderecoPadrao;
 
     private String dataNascimento;
 
@@ -82,21 +80,6 @@ public class ClienteLogin {
         this.name = name;
     }
 
-    public String getEnderecoFaturamento() {
-        return enderecoFaturamento;
-    }
-
-    public void setEnderecoFaturamento(String enderecoFaturamento) {
-        this.enderecoFaturamento = enderecoFaturamento;
-    }
-
-    public String getEnderecoPadrao() {
-        return enderecoPadrao;
-    }
-
-    public void setEnderecoPadrao(String enderecoPadrao) {
-        this.enderecoPadrao = enderecoPadrao;
-    }
 
     public String getDataNascimento() {
         return dataNascimento;

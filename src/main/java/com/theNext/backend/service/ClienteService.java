@@ -35,28 +35,19 @@ public class ClienteService {
 			if (cliente.getPassword() != null) {
 				clienteBD.setPassword(criptografarSenha(cliente.getPassword()));
 			}
-            if (cliente.getName() != null) {
+			if (cliente.getName() != null) {
 				clienteBD.setName(cliente.getName());
 			}
-            if (cliente.getDataNascimento() != null) {
+			if (cliente.getDataNascimento() != null) {
 				clienteBD.setDataNascimento(cliente.getDataNascimento());
 			}
-            if (cliente.getGenero() != null) {
+			if (cliente.getGenero() != null) {
 				clienteBD.setGenero(cliente.getGenero());
 			}
-            if (cliente.getCep() != null) {
-				clienteBD.setCep(cliente.getCep());
-			}
-            if (cliente.getCpf() != null) {
+			if (cliente.getCpf() != null) {
 				clienteBD.setCpf(cliente.getCpf());
 			}
-            if (cliente.getEnderecoFaturamento() != null) {
-				clienteBD.setEnderecoFaturamento(cliente.getEnderecoFaturamento());
-			}
-            if (cliente.getEnderecoPadrao() != null) {
-				clienteBD.setEnderecoPadrao(cliente.getEnderecoPadrao());
-			}
-            
+
 			clienteRepository.saveAndFlush(clienteBD);
 			return Optional.of(clienteBD);
 		}
@@ -64,7 +55,6 @@ public class ClienteService {
 		return Optional.empty();
 
 	}
-
 
 	public Optional<ClienteLogin> autenticarCliente(Optional<ClienteLogin> clienteLogin) {
 
@@ -76,13 +66,10 @@ public class ClienteService {
 				clienteLogin.get().setId(cliente.get().getId());
 				clienteLogin.get().setName(cliente.get().getName());
 				clienteLogin.get().setEmail(cliente.get().getEmail());
-                clienteLogin.get().setDataNascimento(cliente.get().getDataNascimento());
-                clienteLogin.get().setGenero(cliente.get().getGenero());
-				clienteLogin.get().setCep(cliente.get().getCep());
+				clienteLogin.get().setDataNascimento(cliente.get().getDataNascimento());
+				clienteLogin.get().setGenero(cliente.get().getGenero());
 				clienteLogin.get().setCpf(cliente.get().getCpf());
-                clienteLogin.get().setEnderecoFaturamento(cliente.get().getEnderecoFaturamento());
 				clienteLogin.get().setCpf(cliente.get().getCpf());
-                clienteLogin.get().setEnderecoPadrao(cliente.get().getEnderecoPadrao());
 				clienteLogin.get()
 						.setToken(gerarBasicToken(clienteLogin.get().getEmail(), clienteLogin.get().getPassword()));
 				clienteLogin.get().setPassword(cliente.get().getPassword());

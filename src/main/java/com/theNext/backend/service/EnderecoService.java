@@ -16,32 +16,29 @@ public class EnderecoService {
 
     public Optional<Endereco> cadastrarEndereco(Endereco endereco) {
 
-		return Optional.of(enderecoRepository.save(endereco));
+        return Optional.of(enderecoRepository.save(endereco));
 
-	}
-
+    }
 
     public Optional<Endereco> atualizarEndereco(Endereco endereco) {
-		Long id = endereco.getId();
-		Endereco enderecoBD = enderecoRepository.findById(id).get();
+        Long id = endereco.getId();
+        Endereco enderecoBD = enderecoRepository.findById(id).get();
 
-		if (enderecoRepository.findById(id).isPresent()) {
-			if (endereco.getEndereco() != null) {
-				enderecoBD.setEndereco(endereco.getEndereco());
-			}
+        if (enderecoRepository.findById(id).isPresent()) {
+            enderecoBD.setPadrao(endereco.isPadrao());
 
-			enderecoRepository.saveAndFlush(enderecoBD);
-			return Optional.of(enderecoBD);
-		}
+            enderecoRepository.saveAndFlush(enderecoBD);
+            return Optional.of(enderecoBD);
+        }
 
-		return Optional.empty();
+        return Optional.empty();
 
-	}
+    }
 
-    public Optional<Endereco> atualizarStatus(String endereco) {
-        Endereco usuario = enderecoRepository.findByEndereco(endereco).get();
+    public Optional<Endereco> atualizarStatus(Long id) {
+        Endereco usuario = enderecoRepository.findById(id).get();
 
-        if (enderecoRepository.findByEndereco(endereco).isPresent()) {
+        if (enderecoRepository.findById(id).isPresent()) {
 
             if (usuario.isAtivo()) {
                 usuario.setAtivo(false);
