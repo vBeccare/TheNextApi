@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.theNext.backend.model.Produto;
-import com.theNext.backend.repository.ProdutoRepository;
 import com.theNext.backend.service.ProdutoService;
 
 @RestController
@@ -30,9 +29,6 @@ public class ProdutoController {
 
 	@Autowired
 	private ProdutoService produtoService;
-
-	@Autowired
-	private ProdutoRepository produtoRepository;
 
 	@GetMapping("/all")
 	public ResponseEntity<Page<Produto>> listAll(Pageable pageable) {

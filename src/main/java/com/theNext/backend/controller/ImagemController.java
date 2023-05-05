@@ -1,6 +1,5 @@
 package com.theNext.backend.controller;
 
-import java.util.Base64;
 import java.util.List;
 
 import javax.validation.Valid;

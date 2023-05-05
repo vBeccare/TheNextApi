@@ -11,8 +11,6 @@ public class ClienteLogin {
 
     private String name;
 
-
-
     private String dataNascimento;
 
     private String genero;

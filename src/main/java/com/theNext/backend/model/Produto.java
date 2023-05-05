@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 
@@ -43,6 +44,10 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("produto")
     private List<Imagem> imagem;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("produto")
+    private List<CarrinhoCompra> carrinho;
 
     public Long getId() {
         return id;
@@ -122,6 +127,8 @@ public class Produto {
 
     public void setImgPrincipal(int imgPrincipal) {
         this.imgPrincipal = imgPrincipal;
-    }   
+    }
+
+
 
 }

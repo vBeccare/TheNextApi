@@ -1,6 +1,5 @@
 package com.theNext.backend.model;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,7 +26,6 @@ public class Cliente {
 
     private String name;
 
-
     private String dataNascimento;
 
     private String genero;
@@ -37,6 +35,10 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("cliente")
     private List<Endereco> endereco;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("cliente")
+    private List<CarrinhoCompra> carrinho;
 
     public Long getId() {
         return id;
@@ -103,6 +105,12 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
     }
 
-    
+    public List<CarrinhoCompra> getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(List<CarrinhoCompra> carrinho) {
+        this.carrinho = carrinho;
+    }
     
 }
