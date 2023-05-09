@@ -42,6 +42,8 @@ public class CarrinhoCompra {
 
     private Boolean pagamento;
 
+    private String status = "Aguardando Pedido";
+
     @ManyToOne
     @JsonIgnoreProperties("Carrinho")
     private Produto produto;
@@ -163,5 +165,15 @@ public class CarrinhoCompra {
     public void setNumeroCartao(BigInteger numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
 
 }

@@ -16,7 +16,10 @@ public class CarrinhoService {
 
 	public Optional<CarrinhoCompra> cadastrarCarrinho(CarrinhoCompra carrinho) {
 
+		if (carrinho.getCliente() != null && carrinho.getProduto() != null) {
 		return Optional.of(carrinhoRepository.save(carrinho));
+		}
+		return Optional.empty();
 
 	}
 
