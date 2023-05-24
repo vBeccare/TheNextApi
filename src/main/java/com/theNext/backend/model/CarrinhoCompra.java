@@ -1,7 +1,7 @@
 package com.theNext.backend.model;
 
 
-import java.math.BigInteger;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,50 +22,47 @@ public class CarrinhoCompra {
 
     private String nome;
 
-    private BigInteger numeroCartao;
+    private String numeroCartao;
 
     private int codigo;
 
     private int parcelas;
 
+    private LocalDate dataCompra = LocalDate.now();
+
     private String dataVencimento;
 
-    private int quantidade;
-
-    private String valorTotal;
+    private double valorTotal;
 
     private String frete;
 
-    private String totalGeral;
+    private double totalGeral;
 
     private String endereçoEntrega;
 
+    private Integer codigoItem;
+
     private Boolean pagamento;
 
-    private String status = "Aguardando Pedido";
-
-    @ManyToOne
-    @JsonIgnoreProperties("Carrinho")
-    private Produto produto;
+    private String status = "Aguardando pagamento";
 
     @ManyToOne
     @JsonIgnoreProperties("Carrinho")
     private Cliente cliente;
 
-
-    public int getQuantidade() {
-        return quantidade;
+    public LocalDate getDataCompra() {
+        return dataCompra;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setDataCompra(LocalDate dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
-    public String getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(String valorTotal) {
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
@@ -77,11 +74,11 @@ public class CarrinhoCompra {
         this.frete = frete;
     }
 
-    public String getTotalGeral() {
+    public double getTotalGeral() {
         return totalGeral;
     }
 
-    public void setTotalGeral(String totalGeral) {
+    public void setTotalGeral(double totalGeral) {
         this.totalGeral = totalGeral;
     }
 
@@ -125,7 +122,6 @@ public class CarrinhoCompra {
         this.nome = nome;
     }
 
-
     public int getCodigo() {
         return codigo;
     }
@@ -150,19 +146,11 @@ public class CarrinhoCompra {
         this.dataVencimento = dataVencimento;
     }
 
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public BigInteger getNumeroCartao() {
+    public String getNumeroCartao() {
         return numeroCartao;
     }
 
-    public void setNumeroCartao(BigInteger numeroCartao) {
+    public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
 
@@ -174,6 +162,12 @@ public class CarrinhoCompra {
         this.status = status;
     }
 
-    
+    public Integer getCodigoItem() {
+        return codigoItem;
+    }
+
+    public void setCodigoItem(Integer codigoItem) {
+        this.codigoItem = codigoItem;
+    }
 
 }

@@ -44,9 +44,6 @@ public class Produto {
     @JsonIgnoreProperties("produto")
     private List<Imagem> imagem;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("produto")
-    private List<CarrinhoCompra> carrinho;
 
     public Long getId() {
         return id;
