@@ -14,11 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
-
 @Entity
 @Table(name = "tb_produto")
 public class Produto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,7 +43,6 @@ public class Produto {
     @JsonIgnoreProperties("produto")
     private List<Imagem> imagem;
 
-
     public Long getId() {
         return id;
     }
@@ -67,6 +65,21 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Produto(Long id, String name, String descricao, float avaliacao, float preco, int quantidade,
+            boolean isAtivo) {
+        this.id = id;
+        this.name = name;
+        this.descricao = descricao;
+        this.avaliacao = avaliacao;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.isAtivo = isAtivo;
+    }
+
+    public Produto() {
+
     }
 
     public float getPreco() {
@@ -124,7 +137,5 @@ public class Produto {
     public void setImgPrincipal(int imgPrincipal) {
         this.imgPrincipal = imgPrincipal;
     }
-
-
 
 }

@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.theNext.backend.model.Imagem;
 
-
-
-
 @Repository
 public interface ImagemRepository extends JpaRepository<Imagem, Long> {
 
